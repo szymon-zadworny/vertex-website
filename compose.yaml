@@ -1,0 +1,22 @@
+services:
+  backend:
+    build: 
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    restart: always
+    ports:
+      - "8000:8000"
+    expose:
+      - "8000"
+    network_mode: "host"
+    command: hypercorn app:asgi_app
+
+  proxy:
+    build: 
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    network_mode: "host"
