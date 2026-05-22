@@ -9,7 +9,7 @@ services:
     expose:
       - "8000"
     network_mode: "host"
-    command: hypercorn app:asgi_app
+    command: uv run hypercorn app:asgi_app
 
   proxy:
     build: 

@@ -1,8 +1,5 @@
-FROM python:3
+FROM ghcr.io/astral-sh/uv:alpine
 
 WORKDIR /usr/src/app
-
-RUN pip install --upgrade pip
 COPY src/ .
-RUN pip install -r requirements.txt
-
+RUN uv sync
