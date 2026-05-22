@@ -5,9 +5,9 @@ app = Flask(__name__)
 asgi_app = WsgiToAsgi(app)
 
 @app.route("/")
-def display_player():
-    return render_template('player.html', src=url_for('static', filename='video/video.mpd'))
+def index():
+    return render_template('index.html')
 
-@app.route('/video/<path:path>')
-def get_static(path):
-    return send_from_directory('static/video', path)
+@app.route('/council')
+def council():
+    return render_template('council.html')
