@@ -1,9 +1,7 @@
 import os
+import sys
 import datetime
 import mistune
-
-
-PATH = "shit"
 
 
 class Article:
@@ -23,9 +21,9 @@ class Article:
         return html
 
 
-def get_articles():
+def get_articles(path):
     articles = []
-    dirs = [os.path.join(PATH, f) for f in os.listdir(PATH)]
+    dirs = [os.path.join(path, f) for f in os.listdir(path)]
 
     for dir in dirs:
         if not os.path.isdir(dir):
