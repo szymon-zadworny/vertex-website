@@ -1,0 +1,48 @@
+import os
+import datetime
+
+
+PATH = "src/shit"
+
+
+class Article:
+    date: datetime
+    title: str
+    content_path: str
+
+    def __init__(self, date, title, content_path):
+        self.date = date
+        self.title = title
+        self.content_path = content_path
+
+
+
+def get_articles():
+    articles = []
+
+    dirs = [os.path.join(PATH, f) for f in os.listdir(PATH)]
+
+
+    for dir in dirs:
+        if not os.path.isdir(dir):
+            continue
+
+        posts = [os.path.join(dir, f) for f in os.listdir(dir)]
+
+        for post in posts:
+            if not os.path.isdir(post):
+                continue
+
+            date = os.path.basename(dir)
+            date = date.split('-')
+            date = datetime.datetime(int(date[0]), int(date[1]), int(date[2]))
+            title = os.path.basename(post)
+            title = title.split('-')[1:]
+            title = " ".join(title)
+            content_path = os.path.join(post, os.path.basename(post))
+            content_path = "".join([content_path, ".md"])
+
+            article = Article(date, title, content_path)
+            articles.append(article)
+    
+    return articles
