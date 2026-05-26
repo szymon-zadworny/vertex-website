@@ -1,12 +1,16 @@
 from asgiref.wsgi import WsgiToAsgi
 from flask import Flask, render_template, url_for, send_from_directory
+import converter
+
+
+blog = converter.get_articles("tmp")
 
 app = Flask(__name__)
 asgi_app = WsgiToAsgi(app)
 
 @app.route("/")
 def index():
-    return render_template('index.html')
+    return render_template('index.html', blog=blog)
 
 @app.route('/council')
 def council():
