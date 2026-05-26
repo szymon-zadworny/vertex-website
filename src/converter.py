@@ -47,6 +47,5 @@ def get_articles(path):
             content_path = "".join([content_path, ".md"])
             article = Article(date, title, content_path)
             articles[key] = article
-            print(key)
     
     return articles
