@@ -2,6 +2,7 @@ import os
 import sys
 import datetime
 import mistune
+from collections import OrderedDict
 
 
 class Article:
@@ -22,7 +23,7 @@ class Article:
 
 
 def get_articles(path):
-    articles = []
+    articles = OrderedDict()
     dirs = [os.path.join(path, f) for f in os.listdir(path)]
 
     for dir in dirs:
@@ -33,15 +34,19 @@ def get_articles(path):
         for post in posts:
             if not os.path.isdir(post):
                 continue
+            key = ""
             date = os.path.basename(dir)
+            key += date
             date = date.split('-')
             date = datetime.datetime(int(date[0]), int(date[1]), int(date[2]))
             title = os.path.basename(post)
+            key = os.path.join(key, title)
             title = title.split('-')[1:]
             title = " ".join(title)
             content_path = os.path.join(post, os.path.basename(post))
             content_path = "".join([content_path, ".md"])
             article = Article(date, title, content_path)
-            articles.append(article)
+            articles[key] = article
+            print(key)
     
     return articles
