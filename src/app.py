@@ -15,9 +15,9 @@ def index():
 def council():
     return render_template('council.html')
 
-@app.route("/blog/<date>/<title>")
-def page(date, title):
-    result = filter(lambda x: x.date.strftime("%Y-%m-%d") == date, blog)
-    article = next(result)
+@app.route("/blog/<date>/<ident>")
+def page(date, ident):
+    post = date + "/" + ident
+    article = blog[post]
     html = article.convert_to_html()
     return render_template('article.html', html=html)
