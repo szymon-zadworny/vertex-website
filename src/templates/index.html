@@ -3,4 +3,14 @@
 {% block content %}
     <h1>Koło Naukowe Vertex</h1>
     <p>Witaj na stronie koła naukowego Vertex!</p>
+    <ul>
+    {% for article in blog %}
+        <div class="ArticleEntry">
+            <li>
+                <h2> {{article.date}} </h2>
+                <h2> {{article.title}} </h2>
+            </li>
+        </div>
+    {% endfor %}
+    </ul>
 {% endblock %}

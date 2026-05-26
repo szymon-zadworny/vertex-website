@@ -9,7 +9,7 @@ blog = get_articles("content/blog")
 
 @app.route("/")
 def index():
-    return render_template('index.html')
+    return render_template('index.html', blog=blog)
 
 @app.route('/council')
 def council():
